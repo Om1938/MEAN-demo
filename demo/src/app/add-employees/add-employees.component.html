@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6">
+    <h2 class="my-5">Add Employee</h2>
+    <form [formGroup]="emp_form">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="emp_name_label">Employee Name</span>
+        </div>
+        <input type="text" class="form-control" placeholder="Employee Name" formControlName="emp_name"
+          aria-label="emp_name" aria-describedby="emp_name_label"
+          [ngClass]="{'is-invalid':(f.emp_name.touched || viewError) && f.emp_name.errors}">
+
+        <div class="invalid-feedback" *ngIf="(f.emp_name.touched || viewError) && f.emp_name.errors">
+          <div *ngIf="f.emp_name.errors.required">Employee Name is Required</div>
+
+        </div>
+
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="salary_label">Salary</span>
+        </div>
+        <input type="number" class="form-control" placeholder="Salary" aria-label="salary" formControlName="salary"
+          aria-describedby="salary_label" [ngClass]="{'is-invalid':(f.salary.touched || viewError) && f.salary.errors}">
+
+        <div class="invalid-feedback" *ngIf="(f.salary.touched || viewError) && f.salary.errors">
+          <div *ngIf="f.salary.errors.required">Salary is Required</div>
+        </div>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="dept_select">Department</label>
+        </div>
+        <select class="custom-select" id="dept_select" formControlName="Dept"
+          [ngClass]="{'is-invalid':(f.Dept.touched || viewError) && f.Dept.errors}">
+          <option selected>Choose...</option>
+          <option *ngFor="let department of departments" value="{{department.dept_name}}">{{department.dept_name}}
+          </option>
+        </select>
+        <div class="invalid-feedback" *ngIf="(f.Dept.touched || viewError) && f.Dept.errors">
+          <div *ngIf="f.Dept.errors.required">Department is Required</div>
+        </div>
+      </div>
+
+      <div class="input-group form-group mb-3">
+        <div class="input-group-prepend mr-2">
+          <label class="input-group-text" for="Gender">Gender</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="Gender" id="inlineRadio1" value="Male"
+            formControlName="Gender" [ngClass]="{'is-invalid':(f.Gender.touched || viewError) && f.Gender.errors}">
+          <label class="form-check-label" for="inlineRadio1">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="Gender" id="inlineRadio2" value="Female"
+            formControlName="Gender" [ngClass]="{'is-invalid':(f.Gender.touched || viewError) && f.Gender.errors}">
+          <label class="form-check-label" for="inlineRadio2">Female</label>
+
+
+        </div>
+        <div style="width: 100%;margin-top: 0.25rem;font-size: 80%;color: #dc3545;"
+          *ngIf="(f.Gender.touched || viewError) && f.Gender.errors">
+          <div *ngIf="f.Gender.errors.required">Gender is Required</div>
+        </div>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="input_mobile">Mobile</span>
+        </div>
+        <input type="number" minlength="10" maxlength="10" class="form-control" placeholder="Mobile number"
+          aria-label="mobile" aria-describedby="input_mobile" formControlName="mobile"
+          [ngClass]="{'is-invalid':(f.mobile.touched || viewError) && f.mobile.errors}">
+        <div class="invalid-feedback" *ngIf="(f.mobile.touched || viewError) && f.mobile.errors">
+          <div *ngIf="f.mobile.errors.required">Department is Required</div>
+          <div *ngIf="f.mobile.errors.min || f.mobile.errors.max">Mobile number length should be 10.</div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary fl-right" (click)="AddEmployee()">Add Employee</button>
+
+    </form>
+  </div>
+  <div class="col-sm-3"></div>
+</div>
